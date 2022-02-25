@@ -11,6 +11,7 @@ public class SingleUserInfo {
     private String email;
     private String firstName;
     private String lastName;
+    private String fullName;
     private String imageUri;
 
     public SingleUserInfo(JSONObject jsonSingleUserINfo){
@@ -20,16 +21,17 @@ public class SingleUserInfo {
             this.firstName = jsonSingleUserINfo.getString("first_name");
             this.lastName = jsonSingleUserINfo.getString("last_name");
             this.imageUri = jsonSingleUserINfo.getString("avatar");
+            this.fullName = firstName+ " " + lastName;
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
     }
 
     public int getId() {
-
         return id;
+    }
+    public String getFullName() {
+        return fullName;
     }
 
     public String getEmail() {
