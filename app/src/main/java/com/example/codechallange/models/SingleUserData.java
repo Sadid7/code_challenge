@@ -1,11 +1,11 @@
-package com.example.codechallange;
+package com.example.codechallange.models;
 
 import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class SingleUserInfo {
+public class SingleUserData {
 
     private int id;
     private String email;
@@ -14,7 +14,7 @@ public class SingleUserInfo {
     private String fullName;
     private String imageUri;
 
-    public SingleUserInfo(JSONObject jsonSingleUserINfo){
+    public SingleUserData(JSONObject jsonSingleUserINfo){
         try {
             this.id = jsonSingleUserINfo.getInt("id");
             this.email = jsonSingleUserINfo.getString("email");

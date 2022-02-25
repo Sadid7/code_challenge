@@ -2,4 +2,6 @@
     <string name="app_name">Code Challange</string>
     <string name="uri">https://reqres.in/api/users/</string>
     <string name="dataFetchMessage">Fetching user data</string>
+    <string name="offlineUserData">codechallangedata.txt</string>
+
 </resources>

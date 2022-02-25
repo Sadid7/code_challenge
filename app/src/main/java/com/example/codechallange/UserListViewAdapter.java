@@ -1,27 +1,24 @@
 package com.example.codechallange;
 
 import android.content.Context;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-
+import com.example.codechallange.models.SingleUserData;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class UserListViewAdapter extends BaseAdapter {
-    ArrayList<SingleUserInfo> userInfoList;
+    ArrayList<SingleUserData> userInfoList;
     LayoutInflater layoutInflater;
 
     UserListViewAdapter(Context context,
-                        ArrayList<SingleUserInfo> userInfoList) {
+                        ArrayList<SingleUserData> userInfoList) {
         this.userInfoList = userInfoList;
         this.layoutInflater = (LayoutInflater.from(context));
     }
@@ -58,7 +55,7 @@ public class UserListViewAdapter extends BaseAdapter {
         return view;
     }
 
-    public void setUserInfoList(ArrayList<SingleUserInfo> userInfoList) {
+    public void setUserInfoList(ArrayList<SingleUserData> userInfoList) {
         this.userInfoList = userInfoList;
     }
 }
