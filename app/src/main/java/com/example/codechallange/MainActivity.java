@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, DataRequestListener{
+public class MainActivity extends AppCompatActivity implements DataRequestListener{
 
     private ProgressDialog progressDialog;
     private DataRequestTask dataRequestTask;
@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         tv_user = (TextView) findViewById(R.id.userTextView);
         lv_userList = (ListView) findViewById(R.id.user_list_view);
         progressDialog = new ProgressDialog(this);
@@ -34,10 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.dataRequestTask.execute();
     }
 
-    @Override
-    public void onClick(View view) {
-        startDataRequest();
-    }
+
 
     @Override
     public void onRequestStart() {

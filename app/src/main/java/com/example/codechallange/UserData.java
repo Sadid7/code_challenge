@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 public class UserData {
     private ArrayList<SingleUserInfo> allUserInfo;
-    private ArrayList<Image> allUserImages;
 
     public UserData(String dataResponse) {
         this.allUserInfo = new ArrayList<>();
