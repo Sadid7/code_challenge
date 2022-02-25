@@ -1,2 +1,6 @@
-package com.example.codechallange;public class BaseActivity {
+package com.example.codechallange;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class BaseActivity extends AppCompatActivity {
 }
