@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity implements DataRequestListen
         DialogInterface.OnClickListener {
 
     private ProgressDialog progressDialog;
-    private TextView tv_user;
     private ListView lv_userList;
     private EditText et_searchList;
     private TextView tv_online_status;
@@ -43,7 +42,6 @@ public class MainActivity extends AppCompatActivity implements DataRequestListen
     }
 
     private void initializeVIews() {
-        tv_user = (TextView) findViewById(R.id.userTextView);
         lv_userList = (ListView) findViewById(R.id.userListView);
         et_searchList = (EditText) findViewById(R.id.searchUserLEditText);
         et_searchList.addTextChangedListener(this);

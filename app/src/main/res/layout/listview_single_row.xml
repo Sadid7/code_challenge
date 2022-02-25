@@ -5,11 +5,10 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:id="@+id/userImage"
+        android:id="@+id/userImageVIew"
         android:layout_weight="1"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:src="@drawable/ic_launcher_background">
+        android:layout_height="match_parent">
 
     </ImageView>
 
@@ -20,7 +19,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/userName"
+            android:id="@+id/userNameTextView"
             android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -28,7 +27,7 @@
         </TextView>
 
         <TextView
-            android:id="@+id/email"
+            android:id="@+id/userEmailTextVIew"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 

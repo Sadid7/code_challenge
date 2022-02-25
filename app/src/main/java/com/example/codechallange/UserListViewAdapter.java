@@ -41,9 +41,9 @@ public class UserListViewAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = this.layoutInflater.inflate(R.layout.listview_single_row, null);
-        TextView tvUserName = (TextView) view.findViewById(R.id.userName);
-        TextView tvUserEmail = (TextView) view.findViewById(R.id.email);
-        ImageView ivUserImage = (ImageView) view.findViewById(R.id.userImage);
+        TextView tvUserName = (TextView) view.findViewById(R.id.userNameTextView);
+        TextView tvUserEmail = (TextView) view.findViewById(R.id.userEmailTextVIew);
+        ImageView ivUserImage = (ImageView) view.findViewById(R.id.userImageVIew);
         tvUserName.setText(userInfoList.get(i).getFullName());
         tvUserEmail.setText(userInfoList.get(i).getEmail());
         Picasso.get()
