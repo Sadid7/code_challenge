@@ -28,7 +28,6 @@ public class DataRequestTask extends AsyncTask<Void, Void, Response> {
         Response response;
         try  {
              response = client.newCall(request).execute();
-
         } catch (Exception exception) {
             return null;
         }
