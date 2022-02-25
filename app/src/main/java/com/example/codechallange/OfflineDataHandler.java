@@ -35,10 +35,8 @@ public class OfflineDataHandler {
                 while ((receiveString = bufferedReader.readLine()) != null) {
                     stringBuilder.append(receiveString);
                 }
-
                 inputStream.close();
                 offlineDataString = stringBuilder.toString();
-
             }
         } catch (IOException ioException) {
             Log.e("offline data", "Can not read file: " + ioException.toString());

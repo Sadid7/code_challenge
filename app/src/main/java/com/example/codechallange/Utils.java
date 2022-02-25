@@ -12,16 +12,15 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 public class Utils {
-    public static AlertDialog getAlertDialog(Context context,
-                                             String title,
+    public static AlertDialog showErrorDialog(Context context,
                                              String message,
-                                             DialogInterface.OnClickListener listener, String buttonName) {
+                                             DialogInterface.OnClickListener listener
+                                             ) {
         return new AlertDialog.Builder(context).
-                setTitle(title).
+                setTitle("Error Occurred").
                 setMessage(message)
-                .setNeutralButton(buttonName,listener).
+                .setNeutralButton("Retry",listener).
                         create();
-
     }
 
     public static boolean isInternetAvailable(Context context) {
@@ -39,7 +38,6 @@ public class Utils {
             } else {
                 return false;
             }
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return false;

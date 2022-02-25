@@ -1,12 +1,10 @@
 package com.example.codechallange;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,7 +14,9 @@ import android.widget.TextView;
 
 import com.example.codechallange.models.AllUserData;
 
-public class MainActivity extends AppCompatActivity implements DataRequestListener, TextWatcher, DialogInterface.OnClickListener {
+public class MainActivity extends AppCompatActivity implements DataRequestListener,
+        TextWatcher,
+        DialogInterface.OnClickListener {
 
     private ProgressDialog progressDialog;
     private TextView tv_user;
@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity implements DataRequestListen
 
     private void initializeVIews() {
         tv_user = (TextView) findViewById(R.id.userTextView);
-        lv_userList = (ListView) findViewById(R.id.user_list_view);
-        et_searchList = (EditText) findViewById(R.id.searchUserList);
+        lv_userList = (ListView) findViewById(R.id.userListView);
+        et_searchList = (EditText) findViewById(R.id.searchUserLEditText);
         et_searchList.addTextChangedListener(this);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getString(R.string.dataFetchMessage));
@@ -72,17 +72,16 @@ public class MainActivity extends AppCompatActivity implements DataRequestListen
             this.allUserData = new AllUserData(offlineDataHandler.getUserData());
             showUserList();
         } else {
-            Utils.getAlertDialog(this,
-                    "Data Error",
+            Utils.showErrorDialog(this,
                     "Data Not Found",
-                    this,
-                    "Retry")
+                    this)
                     .show();
         }
     }
 
     private void startDataRequest() {
-        DataRequestTask dataRequestTask = new DataRequestTask(getString(R.string.uri),this);
+        DataRequestTask dataRequestTask = new DataRequestTask(getString(R.string.uri),
+                this);
         dataRequestTask.execute();
     }
 
@@ -102,12 +101,9 @@ public class MainActivity extends AppCompatActivity implements DataRequestListen
     @Override
     public void onRequestError(String errorMessage) {
         this.progressDialog.dismiss();
-        Utils.getAlertDialog(this,
-                "Error Occurred",
+        Utils.showErrorDialog(this,
                 "Couldn't Fetch Data",
-                this,
-                "Retry").show();
-
+                this).show();
     }
 
     private void showUserList() {

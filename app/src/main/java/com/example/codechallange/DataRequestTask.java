@@ -16,7 +16,6 @@ public class DataRequestTask extends AsyncTask<Void, Void, Response> {
         this.dataRequestListener = requestListener;
         this.client = new OkHttpClient();
         this.request = new Request.Builder().url(endPointUri).build();
-
     }
 
     @Override
@@ -38,7 +37,6 @@ public class DataRequestTask extends AsyncTask<Void, Void, Response> {
 
     @Override
     protected void onPostExecute(Response response) {
-
         if (response != null && response.isSuccessful()) {
             try {
                 String responseData = response.body().string();
