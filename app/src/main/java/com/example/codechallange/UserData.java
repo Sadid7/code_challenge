@@ -25,6 +25,19 @@ public class UserData {
         }
     }
 
+    public ArrayList<SingleUserInfo> getSearchedUsers(String searchString) {
+
+        ArrayList<SingleUserInfo> searchedUserList= new ArrayList<>();
+        for(SingleUserInfo singleUserInfo : allUserInfo){
+            if(singleUserInfo.getFullName() != null
+                    && singleUserInfo.getFullName().toLowerCase().contains(searchString.toLowerCase())) {
+                searchedUserList.add(singleUserInfo);
+            }
+        }
+        return searchedUserList;
+
+    }
+
     public ArrayList<SingleUserInfo> getAllUserInfo() {
         return allUserInfo;
     }

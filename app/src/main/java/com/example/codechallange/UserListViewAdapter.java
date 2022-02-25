@@ -57,4 +57,8 @@ public class UserListViewAdapter extends BaseAdapter {
                 .into(ivUserImage);
         return view;
     }
+
+    public void setUserInfoList(ArrayList<SingleUserInfo> userInfoList) {
+        this.userInfoList = userInfoList;
+    }
 }
