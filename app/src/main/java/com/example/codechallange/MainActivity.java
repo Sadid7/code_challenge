@@ -22,12 +22,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         user = (TextView) findViewById(R.id.userTextView);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getString(R.string.dataFetchMessage));
-        progressDialog.setTitle("dsad");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDialog.show();
         this.dataRequestTask = new DataRequestTask(getString(R.string.uri),this);
         startDataRequest();
-        Log.d("sabid","why");
+
 
     }
 
@@ -50,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onRequestSuccess(String response) {
         this.progressDialog.dismiss();
         user.setText(response);
+        UserData userData = new UserData(response);
 
     }
 
