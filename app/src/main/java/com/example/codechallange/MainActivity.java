@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity implements DataRequestListen
 
     private ProgressDialog progressDialog;
     private ListView lv_userList;
-    private EditText et_searchList;
     private TextView tv_online_status;
     private UserListViewAdapter userLIstVIewAdapter;
     private AllUserData allUserData;
@@ -44,10 +43,10 @@ public class MainActivity extends AppCompatActivity implements DataRequestListen
     }
 
     private void initializeVIews() {
-        lv_userList = (ListView) findViewById(R.id.userListView);
-        et_searchList = (EditText) findViewById(R.id.searchUserLEditText);
-        tv_online_status = (TextView) findViewById(R.id.userStatusTextView);
+        EditText et_searchList = (EditText) findViewById(R.id.searchUserLEditText);
         et_searchList.addTextChangedListener(this);
+        tv_online_status = (TextView) findViewById(R.id.userStatusTextView);
+        lv_userList = (ListView) findViewById(R.id.userListView);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getString(R.string.dataFetchMessage));
         progressDialog.setCancelable(false);
@@ -64,6 +63,8 @@ public class MainActivity extends AppCompatActivity implements DataRequestListen
     }
 
     private void loadData() {
+        /**checks availability of offline data or internet access */
+
         if (Utils.isInternetAvailable(this)) {
             startDataRequest();
         } else if (Utils.isOfflineDataAvailable(this,getString(R.string.offlineUserData))) {
@@ -117,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements DataRequestListen
     @Override
     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
     }
-
+    /**shows searched users */
     @Override
     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
         userLIstVIewAdapter.setUserInfoList( allUserData.getSearchedUsers(charSequence.toString()));
@@ -127,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements DataRequestListen
     @Override
     public void afterTextChanged(Editable editable) {
     }
-
+    /**Onclicklistener for error alert dialog */
     @Override
     public void onClick(DialogInterface dialogInterface, int i) {
         loadData();

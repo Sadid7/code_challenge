@@ -51,6 +51,7 @@ public class UserListViewAdapter extends BaseAdapter {
         ImageView ivUserImage = (ImageView) view.findViewById(R.id.userImageVIew);
         tvUserName.setText(userInfoList.get(i).getFullName());
         tvUserEmail.setText(userInfoList.get(i).getEmail());
+        /**method to download images using picasso */
         loadUserImage(userInfoList.get(i).getImageUri(), ivUserImage);
         return view;
     }
