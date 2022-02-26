@@ -1,6 +1,7 @@
 package com.example.codechallange;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.ConnectivityManager;
@@ -21,6 +22,14 @@ public class Utils {
                 setMessage(message)
                 .setNeutralButton("Retry",listener).
                         create();
+    }
+
+    public static ProgressDialog getProgreesDialog(Context context, String message)
+    {
+        ProgressDialog progressDialog= new ProgressDialog(context);
+        progressDialog.setMessage(message);
+        progressDialog.setCancelable(false);
+        return progressDialog;
     }
 
     public static boolean isInternetAvailable(Context context) {

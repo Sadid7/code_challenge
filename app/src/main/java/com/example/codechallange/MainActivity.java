@@ -47,9 +47,7 @@ public class MainActivity extends AppCompatActivity implements DataRequestListen
         et_searchList.addTextChangedListener(this);
         tv_online_status = (TextView) findViewById(R.id.userStatusTextView);
         lv_userList = (ListView) findViewById(R.id.userListView);
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage(getString(R.string.dataFetchMessage));
-        progressDialog.setCancelable(false);
+        progressDialog = Utils.getProgreesDialog(this, getString(R.string.dataFetchMessage));
     }
 
     private void setOnlineStatus() {
