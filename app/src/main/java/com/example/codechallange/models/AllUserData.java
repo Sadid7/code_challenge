@@ -14,7 +14,6 @@ public class AllUserData {
     public AllUserData(String dataResponse) {
         this.allUserInfo = new ArrayList<>();
         try {
-            Log.e("Error error", dataResponse);
             JSONObject jsonUserDataResponse = new JSONObject(dataResponse);
             JSONArray jsonUserDataArray = jsonUserDataResponse.getJSONArray("data");
             for (int i = 0; i < jsonUserDataArray.length(); i++) {
@@ -28,6 +27,7 @@ public class AllUserData {
 
     public ArrayList<SingleUserData> getSearchedUsers(String searchString) {
 
+        searchString = searchString.trim();
         ArrayList<SingleUserData> searchedUserList= new ArrayList<>();
         for(SingleUserData singleUserData : allUserInfo){
             if(singleUserData.getFullName() != null
@@ -36,7 +36,6 @@ public class AllUserData {
             }
         }
         return searchedUserList;
-
     }
 
     public ArrayList<SingleUserData> getAllUserInfo() {

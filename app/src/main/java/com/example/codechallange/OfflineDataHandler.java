@@ -52,7 +52,7 @@ public class OfflineDataHandler {
             outputStreamWriter.close();
         }
         catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
+            Log.e("offline data", "File write failed: ");
         }
     }
 }

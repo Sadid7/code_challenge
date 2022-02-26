@@ -1,4 +1,4 @@
-package com.example.codechallange;
+package com.example.codechallange.api;
 
 public interface DataRequestListener {
      void onRequestStart();

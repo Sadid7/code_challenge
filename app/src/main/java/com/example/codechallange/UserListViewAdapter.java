@@ -40,19 +40,28 @@ public class UserListViewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        view = this.layoutInflater.inflate(R.layout.listview_single_row, null);
+        if (view == null) {
+            view = this.layoutInflater.inflate(R.layout.listview_single_row,
+                    viewGroup,
+                    false);
+        }
+
         TextView tvUserName = (TextView) view.findViewById(R.id.userNameTextView);
         TextView tvUserEmail = (TextView) view.findViewById(R.id.userEmailTextVIew);
         ImageView ivUserImage = (ImageView) view.findViewById(R.id.userImageVIew);
         tvUserName.setText(userInfoList.get(i).getFullName());
         tvUserEmail.setText(userInfoList.get(i).getEmail());
+        loadUserImage(userInfoList.get(i).getImageUri(), ivUserImage);
+        return view;
+    }
+
+    private void loadUserImage(String imageUri, ImageView userImageView) {
         Picasso.get()
-                .load(userInfoList.get(i).getImageUri())
+                .load(imageUri)
                 .resize(350,350)
                 .centerCrop()
                 .placeholder(R.drawable.ic_launcher_foreground)
-                .into(ivUserImage);
-        return view;
+                .into(userImageView);
     }
 
     public void setUserInfoList(ArrayList<SingleUserData> userInfoList) {

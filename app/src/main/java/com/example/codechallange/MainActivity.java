@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.codechallange.api.DataRequestListener;
+import com.example.codechallange.api.DataRequestTask;
 import com.example.codechallange.models.AllUserData;
 
 public class MainActivity extends AppCompatActivity implements DataRequestListener,
@@ -44,29 +46,29 @@ public class MainActivity extends AppCompatActivity implements DataRequestListen
     private void initializeVIews() {
         lv_userList = (ListView) findViewById(R.id.userListView);
         et_searchList = (EditText) findViewById(R.id.searchUserLEditText);
+        tv_online_status = (TextView) findViewById(R.id.userStatusTextView);
         et_searchList.addTextChangedListener(this);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getString(R.string.dataFetchMessage));
-        tv_online_status = (TextView) findViewById(R.id.userStatusTextView);
+        progressDialog.setCancelable(false);
     }
 
     private void setOnlineStatus() {
-        if (!Utils.isInternetAvailable(this)) {
-            tv_online_status.setText("OFFLINE");
-            tv_online_status.setTextColor(Color.RED);
-        } else {
+        if (Utils.isInternetAvailable(this)) {
             tv_online_status.setText("ONLINE");
             tv_online_status.setTextColor(Color.GREEN);
+        } else {
+            tv_online_status.setText("OFFLINE");
+            tv_online_status.setTextColor(Color.RED);
         }
     }
 
     private void loadData() {
-        this.offlineDataHandler = new OfflineDataHandler(this
-                , getString(R.string.offlineUserData));
-
         if (Utils.isInternetAvailable(this)) {
             startDataRequest();
         } else if (Utils.isOfflineDataAvailable(this,getString(R.string.offlineUserData))) {
+            this.offlineDataHandler = new OfflineDataHandler(this
+                    , getString(R.string.offlineUserData));
             this.allUserData = new AllUserData(offlineDataHandler.getUserData());
             showUserList();
         } else {
@@ -93,6 +95,8 @@ public class MainActivity extends AppCompatActivity implements DataRequestListen
         this.progressDialog.dismiss();
         this.allUserData = new AllUserData(response);
         showUserList();
+        this.offlineDataHandler = new OfflineDataHandler(this
+                , getString(R.string.offlineUserData));
         offlineDataHandler.saveUserData(response);
     }
 

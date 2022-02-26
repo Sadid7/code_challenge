@@ -1,6 +1,7 @@
-package com.example.codechallange;
+package com.example.codechallange.api;
 
 import android.os.AsyncTask;
+
 import java.io.IOException;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -41,7 +42,7 @@ public class DataRequestTask extends AsyncTask<Void, Void, Response> {
                 String responseData = response.body().string();
                 this.dataRequestListener.onRequestSuccess(responseData);
             } catch (IOException e) {
-                this.dataRequestListener.onRequestError(e.getMessage());
+                this.dataRequestListener.onRequestError("Could not fetch data");
             }
         } else {
             this.dataRequestListener.onRequestError("Could not fetch data");
