@@ -21,7 +21,7 @@ public class RemoteDataRetrieveTask extends AsyncTask<Void, Void, Response> {
 
     @Override
     protected void onPreExecute() {
-
+        remoteDataRetrieveListener.onRequestStart();
     }
 
     @Override
