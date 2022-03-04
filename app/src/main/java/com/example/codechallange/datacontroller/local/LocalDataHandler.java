@@ -1,22 +1,19 @@
-package com.example.codechallange;
+package com.example.codechallange.datacontroller.local;
 
 import android.content.Context;
 import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.net.InetAddress;
 
-public class OfflineDataHandler {
+public class LocalDataHandler {
     Context context;
     String fileName;
 
-    OfflineDataHandler(Context context, String fileName) {
+    public LocalDataHandler(Context context, String fileName) {
         this.context = context;
         this.fileName = fileName;
     }

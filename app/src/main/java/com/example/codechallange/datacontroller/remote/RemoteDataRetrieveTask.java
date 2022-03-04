@@ -1,4 +1,4 @@
-package com.example.codechallange.api;
+package com.example.codechallange.datacontroller.remote;
 
 import android.os.AsyncTask;
 
@@ -7,21 +7,21 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class DataRequestTask extends AsyncTask<Void, Void, Response> {
+public class RemoteDataRetrieveTask extends AsyncTask<Void, Void, Response> {
 
-    private DataRequestListener dataRequestListener;
+    private RemoteDataRetrieveListener remoteDataRetrieveListener;
     private OkHttpClient client;
     private Request request;
 
-    public DataRequestTask(String endPointUri, DataRequestListener requestListener) {
-        this.dataRequestListener = requestListener;
+    public RemoteDataRetrieveTask(String endPointUri, RemoteDataRetrieveListener requestListener) {
+        this.remoteDataRetrieveListener = requestListener;
         this.client = new OkHttpClient();
         this.request = new Request.Builder().url(endPointUri).build();
     }
 
     @Override
     protected void onPreExecute() {
-        this.dataRequestListener.onRequestStart();
+
     }
 
     @Override
@@ -40,12 +40,12 @@ public class DataRequestTask extends AsyncTask<Void, Void, Response> {
         if (response != null && response.isSuccessful()) {
             try {
                 String responseData = response.body().string();
-                this.dataRequestListener.onRequestSuccess(responseData);
+                this.remoteDataRetrieveListener.onRequestSuccess(responseData);
             } catch (IOException e) {
-                this.dataRequestListener.onRequestError("Could not fetch data");
+                this.remoteDataRetrieveListener.onRequestError("Could not fetch data");
             }
         } else {
-            this.dataRequestListener.onRequestError("Could not fetch data");
+            this.remoteDataRetrieveListener.onRequestError("Could not fetch data");
         }
     }
 }

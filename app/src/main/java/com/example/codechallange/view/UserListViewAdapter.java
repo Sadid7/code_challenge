@@ -1,4 +1,4 @@
-package com.example.codechallange;
+package com.example.codechallange.view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.codechallange.R;
 import com.example.codechallange.models.SingleUserData;
 import com.squareup.picasso.Picasso;
 

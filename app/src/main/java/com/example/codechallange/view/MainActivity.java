@@ -1,4 +1,4 @@
-package com.example.codechallange;
+package com.example.codechallange.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,11 +12,12 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.codechallange.api.DataRequestListener;
-import com.example.codechallange.api.DataRequestTask;
-import com.example.codechallange.models.AllUserData;
+import com.example.codechallange.R;
+import com.example.codechallange.Utils;
+import com.example.codechallange.datacontroller.DataController;
+import com.example.codechallange.datacontroller.DataRetrieveListener;
 
-public class MainActivity extends AppCompatActivity implements DataRequestListener,
+public class MainActivity extends AppCompatActivity implements DataRetrieveListener,
         TextWatcher,
         DialogInterface.OnClickListener {
 
@@ -24,8 +25,7 @@ public class MainActivity extends AppCompatActivity implements DataRequestListen
     private ListView lv_userList;
     private TextView tv_online_status;
     private UserListViewAdapter userLIstVIewAdapter;
-    private AllUserData allUserData;
-    private OfflineDataHandler offlineDataHandler;
+    private DataController dataController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,9 @@ public class MainActivity extends AppCompatActivity implements DataRequestListen
         setContentView(R.layout.activity_main);
         initializeVIews();
         setOnlineStatus();
-        loadData();
+        initiateDataHnadler();
+        this.progressDialog.show();
+        dataController.loadData();
     }
 
     @Override
@@ -60,56 +62,34 @@ public class MainActivity extends AppCompatActivity implements DataRequestListen
         }
     }
 
-    private void loadData() {
-        /**checks availability of offline data or internet access */
-
-        if (Utils.isInternetAvailable(this)) {
-            startDataRequest();
-        } else if (Utils.isOfflineDataAvailable(this,getString(R.string.offlineUserData))) {
-            this.offlineDataHandler = new OfflineDataHandler(this
-                    , getString(R.string.offlineUserData));
-            this.allUserData = new AllUserData(offlineDataHandler.getUserData());
-            showUserList();
-        } else {
-            Utils.showErrorDialog(this,
-                    "Data Not Found",
-                    this)
-                    .show();
-        }
-    }
-
-    private void startDataRequest() {
-        DataRequestTask dataRequestTask = new DataRequestTask(getString(R.string.uri),
-                this);
-        dataRequestTask.execute();
+    private void initiateDataHnadler() {
+        this.dataController = new DataController(this,
+                getString(R.string.uri),
+                getString(R.string.offlineUserData), this);
     }
 
     @Override
-    public void onRequestStart() {
+    public void onRetrieveStart() {
         this.progressDialog.show();
     }
 
     @Override
-    public void onRequestSuccess(String response) {
+    public void onRetrieveSuccess() {
         this.progressDialog.dismiss();
-        this.allUserData = new AllUserData(response);
         showUserList();
-        this.offlineDataHandler = new OfflineDataHandler(this
-                , getString(R.string.offlineUserData));
-        offlineDataHandler.saveUserData(response);
     }
 
     @Override
-    public void onRequestError(String errorMessage) {
+    public void onRetrieveError(String error) {
         this.progressDialog.dismiss();
         Utils.showErrorDialog(this,
-                "Couldn't Fetch Data",
+                error,
                 this).show();
     }
 
     private void showUserList() {
         this.userLIstVIewAdapter = new UserListViewAdapter(this,
-                allUserData.getAllUserInfo());
+                dataController.getAllUserInfo());
         lv_userList.setAdapter(userLIstVIewAdapter);
     }
 
@@ -119,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements DataRequestListen
     /**shows searched users */
     @Override
     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        userLIstVIewAdapter.setUserInfoList( allUserData.getSearchedUsers(charSequence.toString()));
+        userLIstVIewAdapter.setUserInfoList( dataController.getSearchedUsers(charSequence.toString()));
         userLIstVIewAdapter.notifyDataSetChanged();
     }
 
@@ -129,6 +109,8 @@ public class MainActivity extends AppCompatActivity implements DataRequestListen
     /**Onclicklistener for error alert dialog */
     @Override
     public void onClick(DialogInterface dialogInterface, int i) {
-        loadData();
+        dataController.loadData();
     }
+
+
 }
